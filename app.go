@@ -25,7 +25,7 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	var dupa github.Event
+	var dupa *github.Event
 
 	event, err := github.ParseWebHook(github.WebHookType(r), payload)
 	if err != nil {
@@ -33,7 +33,7 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dupa = event.(github.Event)
+	dupa = event.(*github.Event)
 
 	log.Printf(*dupa.Type)
 
