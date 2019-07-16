@@ -40,7 +40,7 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 		// someone starred our repository
 		if e.GetAction() == "created" {
 			log.Printf("%s repository starred\n", e.GetStarredAt())
-		} else if e.GetAction() == "delete" {
+		} else if e.GetAction() == "deleted" {
 			log.Printf("%s repository unstarred\n", e.GetStarredAt())
 		}
 	default:
