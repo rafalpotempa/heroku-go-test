@@ -39,11 +39,9 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 	case *github.PullRequestEvent:
 		// this is a pull request, do something with it
 	case *github.StarEvent:
-		// https://developer.github.com/v3/activity/events/types/#watchevent
 		// someone starred our repository
 		if e.GetAction() == "created" {
-			log.Printf("%s starred repository %s at %s\n",
-				e.Sender.Login, e.Repository.FullName, e.GetStarredAt())
+			log.Printf("someone starred repository at %s\n", e.GetStarredAt())
 		}
 	default:
 		log.Printf("unknown event type %s\n", github.WebHookType(r))
