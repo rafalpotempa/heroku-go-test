@@ -33,7 +33,7 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 
 	switch e := event.(type) {
 	case *github.PushEvent:
-
+		log.Printf("push")
 	case *github.WatchEvent:
 		log.Printf("%s is watching repo \"%s\"\n", e.GetSender(), e.GetRepo())
 	case *github.StarEvent:
