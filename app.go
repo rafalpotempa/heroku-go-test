@@ -35,12 +35,13 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 	case *github.PushEvent:
 
 	case *github.WatchEvent:
-
-		log.Printf("sratata %v", e)
+		log.Printf("%v", e.)
 	case *github.StarEvent:
 		// someone starred our repository
 		if e.GetAction() == "created" {
-			log.Printf("someone starred repository at %s\n", e.GetStarredAt())
+			log.Printf("%s: %s starred repository %s\n", e.GetStarredAt(), e.GetSender(), e.GetRepo())
+		} else if e.GetAction() == "delete"{
+			log.Printf("%s: %s unstarred repository %s\n", e.GetStarredAt(), e.GetSender(), e.GetRepo())
 		}
 	default:
 		log.Printf("unknown event type %s\n", github.WebHookType(r))
