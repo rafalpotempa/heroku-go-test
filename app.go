@@ -49,9 +49,14 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func index(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(w, "testy")
+}
+
 func main() {
 
 	log.Println("server started")
 	http.HandleFunc("/webhook", handleWebhook)
+	http.HandleFunc("/", index)
 	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
 }
