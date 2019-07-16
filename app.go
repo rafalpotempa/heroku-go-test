@@ -31,19 +31,18 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Println(&event)
+	log.Printf("%v", event)
 
 	switch e := event.(type) {
 	case *github.PushEvent:
 		// this is a commit push, do something with it
 	case *github.PullRequestEvent:
 		// this is a pull request, do something with it
-	case *github.WatchEvent:
+	case *github.StarEvent:
 		// https://developer.github.com/v3/activity/events/types/#watchevent
 		// someone starred our repository
-		if e.Action != nil && *e.Action == "star" {
-			log.Printf("%s starred repository %s\n",
-				*e.Sender.Login, *e.Repo.FullName)
+		if e.Action != nil && *e.Action == "starred" {
+			log.Printf("starred repository \n")
 		}
 
 	default:
