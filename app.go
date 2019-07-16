@@ -31,6 +31,8 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Println(event)
+
 	switch e := event.(type) {
 	case *github.PushEvent:
 		// this is a commit push, do something with it
