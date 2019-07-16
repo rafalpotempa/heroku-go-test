@@ -33,10 +33,10 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 
 	switch e := event.(type) {
 	case *github.PushEvent:
-		// this is a commit push, do something with it
+
 	case *github.WatchEvent:
-		// this is a pull request, do something with it
-		log.Printf("%v", e)
+
+		log.Printf("sratata %v", e)
 	case *github.StarEvent:
 		// someone starred our repository
 		if e.GetAction() == "created" {
