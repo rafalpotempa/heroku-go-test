@@ -39,7 +39,7 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 	case *github.WatchEvent:
 		// https://developer.github.com/v3/activity/events/types/#watchevent
 		// someone starred our repository
-		if e.Action != nil && *e.Action == "starred" {
+		if e.Action != nil && *e.Action == "star" {
 			fmt.Printf("%s starred repository %s\n",
 				*e.Sender.Login, *e.Repo.FullName)
 		}
