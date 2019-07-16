@@ -25,28 +25,32 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
+	var dupa github.Event
+
 	event, err := github.ParseWebHook(github.WebHookType(r), payload)
 	if err != nil {
 		log.Printf("could not parse webhook: err=%s\n", err)
 		return
 	}
 
-	log.Println(&event)
+	dupa = event.(github.Event)
 
-	switch e := event.(type) {
-	case *github.PushEvent:
-		// this is a commit push, do something with it
-	case *github.PullRequestEvent:
-		// this is a pull request, do something with it
-	case *github.StarEvent:
-		// someone starred our repository
-		if e.GetAction() == "created" {
-			log.Printf("someone starred repository at %s\n", e.GetStarredAt())
-		}
-	default:
-		log.Printf("unknown event type %s\n", github.WebHookType(r))
-		return
-	}
+	log.Printf(*dupa.Type)
+
+	// switch e := event.(type) {
+	// case *github.PushEvent:
+	// 	// this is a commit push, do something with it
+	// case *github.PullRequestEvent:
+	// 	// this is a pull request, do something with it
+	// case *github.StarEvent:
+	// 	// someone starred our repository
+	// 	if e.GetAction() == "created" {
+	// 		log.Printf("someone starred repository at %s\n", e.GetStarredAt())
+	// 	}
+	// default:
+	// 	log.Printf("unknown event type %s\n", github.WebHookType(r))
+	// 	return
+	// }
 }
 
 func index(w http.ResponseWriter, req *http.Request) {
