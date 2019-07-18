@@ -20,7 +20,11 @@ type webhook struct {
 func handleWebhook(w http.ResponseWriter, r *http.Request) {
 	payload, err := github.ValidatePayload(r, []byte("my-secret-key"))
 
+<<<<<<< HEAD
 	log.Printf("%v\n", r)
+=======
+	log.Printf("%v\n", string(payload))
+>>>>>>> 50ab40cd50d01471adf5982ff21b4ce3fbbcb589
 	log.Printf("%v\n", err)
 
 	if err != nil {
