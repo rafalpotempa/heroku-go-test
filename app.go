@@ -19,6 +19,10 @@ type webhook struct {
 
 func handleWebhook(w http.ResponseWriter, r *http.Request) {
 	payload, err := github.ValidatePayload(r, []byte("my-secret-key"))
+
+	log.Printf("%v\n", payload)
+	log.Printf("%v\n", err)
+
 	if err != nil {
 		log.Printf("error validating request body: err=\"%s\"\n", err)
 		return
